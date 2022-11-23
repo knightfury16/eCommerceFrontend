@@ -13,7 +13,7 @@ type ProductType = {
 }
 
 type ToggleFavType = {
-  id: string;
+  id: number;
 }
 
 interface UserSliceTypes {

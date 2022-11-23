@@ -4,33 +4,31 @@ import ProductsLoading from './loading';
 import { ProductTypeList } from 'types';
 
 const ProductsContent = () => {
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
+  const fetcher = (url: string) => fetch(url).then(res => res.json());
   const { data, error } = useSwr('/api/products', fetcher);
+
+  console.log("My data will be here",data)
 
   if (error) return <div>Failed to load users</div>;
   return (
     <>
-      {!data && 
-        <ProductsLoading />
-      }
+      {!data && <ProductsLoading />}
 
-      {data &&
+      {data && (
         <section className="products-list">
-          {data.map((item: ProductTypeList)  => (
-            <ProductItem 
-              id={item.id} 
+          {data.products.map((item: ProductTypeList) => (
+            <ProductItem
+              id={item.id}
               name={item.name}
               price={item.price}
-              color={item.color}
-              currentPrice={item.currentPrice}
+              ratings={item.ratings}
               key={item.id}
-              images={item.images} 
             />
           ))}
         </section>
-      }
+      )}
     </>
   );
 };
-  
-export default ProductsContent
+
+export default ProductsContent;

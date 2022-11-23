@@ -1,13 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 // fake data
-import products from '../../utils/data/products';
+// import products from '../../utils/data/products';
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
-  console.log(req);
+export default async (_req: NextApiRequest, res: NextApiResponse) => {
+  // console.log(req);
 
-  // fake loading time
-  setTimeout(() => {
-    res.status(200).json(products);
-  }, 800);
-}
+  const products = await (await fetch('http://localhost:4000/api/products')).json();
+  // console.log(products)
+  res.json(products)
+};
